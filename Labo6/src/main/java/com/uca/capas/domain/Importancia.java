@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Importancia {
 	
 	@Id
-	@Column(name = "c_importacnia")
+	@Column(name = "c_importancia")
 	private Integer codigo_i;
 	
 	@Column(name = "s_importancia")
