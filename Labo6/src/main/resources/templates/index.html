@@ -10,6 +10,8 @@
 		<form th:action="@{/ingresarContribuyente}" th:object="${contribuyente}" method="post">
 			<h2 class="titulo-form">Ingresar contribuyente</h2>
 			
+			<input type="hidden" th:field="*{codigo_c}">
+			
 			<label>Nombre:</label> 
 			<input type="text" th:field="*{nombre}" placeholder=" "><br> 
 			<span th:errors="*{nombre}" style="color: #E81505"></span> 
@@ -22,16 +24,13 @@
 			<input type="number" th:field="*{nit}" placeholder=" "><br>
 			<span th:errors="*{nit}" style="color: #E81505"></span> 
 			
-			<label>Fecha:</label> 
-			<input type="text" th:field="*{fecha}" placeholder=" "> <br> 
-			<span th:errors="*{fecha}" style="color: #E81505"></span> 
 			
 			<div class = "importancia">
 				<label>Importancia :</label>
 				<div class = "select-contenedor">
 					<select th:field = "*{importancia.codigo_i}">
 						<option th:each = "impor:${importancias}"
-							th:value = ${impor.codigo_i}
+							th:value = "${impor.codigo_i}"
 							th:text = "${impor.importancia}">
 						</option>
 					</select>

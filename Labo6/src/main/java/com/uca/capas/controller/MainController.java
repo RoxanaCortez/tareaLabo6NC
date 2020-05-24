@@ -1,10 +1,18 @@
 package com.uca.capas.controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.domain.Contribuyente;
@@ -34,6 +42,38 @@ public class MainController {
 		mav.setViewName("index");
 		return mav;
 		
+	}
+	
+	@PostMapping("/ingresarContribuyente")
+	public ModelAndView ingresar(@Valid @ModelAttribute Contribuyente contribuyente, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) { 
+			List<Importancia> importancias= null;
+			try {
+				importancias =  importanciaService.findAll();
+				
+				mav.addObject("importancias",importancias);
+				mav.setViewName("index");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else {	
+			try {
+				ZoneId zona = ZoneId.systemDefault();
+				LocalDate fechaActual = LocalDate.now();
+				Date fecha = Date.from(fechaActual.atStartOfDay(zona).toInstant());
+				contribuyente.setFecha(fecha);
+				contribuyente.getFecha();
+				contribuyenteService.insertar(contribuyente);
+				
+				mav.addObject("exito", "Contribuyente guardado con éxito");
+				mav.setViewName("guardado");
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return mav;
+	
 	}
 
 }
