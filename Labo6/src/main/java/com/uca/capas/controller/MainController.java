@@ -44,6 +44,18 @@ public class MainController {
 		
 	}
 	
+	@GetMapping("/contribuyentes")
+	public ModelAndView contibuyentes() {
+		ModelAndView mav = new ModelAndView();
+		List<Contribuyente> contribuyentes = null;
+		
+		contribuyentes = contribuyenteService.findAll();
+	
+		mav.addObject("contribuyentes", contribuyentes);
+		mav.setViewName("contribuyentes");
+		return mav;
+	}
+	
 	@PostMapping("/ingresarContribuyente")
 	public ModelAndView ingresar(@Valid @ModelAttribute Contribuyente contribuyente, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
