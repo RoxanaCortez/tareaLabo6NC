@@ -3,11 +3,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Contribuyente guardado</title>
+<link href="css/estilo_l6.css" rel="stylesheet">
 </head>
 <body>
-	<p th:text = "${exito}"></p>
-	<a href = "/inicio">
-		<input type = "submit" value = "Regresar">
-	</a>
+	<div class="contenedor-resultado"> 
+		<p class="titulo-resultado" th:text = "${exito}"></p>
+		<a href="/inicio">
+			<input class="boton-nuevo" type="submit"  value="Regresar" >
+		</a>
+	</div> 
 </body>
 </html>
